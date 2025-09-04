@@ -12,7 +12,15 @@
 <body>
     <h1>Welcome to the Home Page</h1>
     <div class="container pt-5">
-        
+        <div class="card mx-auto" style="width: 18rem;">
+            <img class="card-img-top" src="{{employee.photo.url}}" alt="Employee photo">
+            <div class="card-body">
+                <p class="card-text m-0">{{ employee.first_name }} {{ employee.last_name }}</p>
+                <p class="card-text m-0">{{ employee.designation }}</p>
+                <p class="card-text m-0">{{ employee.email_address }}</p>
+                <p class="card-text m-0">{{ employee.phone_number }}</p>
+            </div>
+        </div>
     </div>
 
 </body>

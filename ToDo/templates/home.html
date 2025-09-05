@@ -42,15 +42,16 @@
             <div class="col-md-5 col-lg-5">
                 <h5>Completed Tasks</h5>
                 <!-- List of all the tasks that have completed -->
+                 {% for task in completed_tasks %}
                 <div class="card m-1">
                     <div class="card-body">
                         {{ task.task }}
-                        This is completed task
                         <span style="position: relative; float: right;">
                             <a  class="btn btn-danger"><i class="fa fa-times"></i> Mark as Undone</a>
                         </span>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
         <div class="row">

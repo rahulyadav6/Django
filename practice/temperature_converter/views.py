@@ -5,7 +5,11 @@ from . models import Temperature
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html')
+    temperatures = Temperature.objects.all()
+    context = {
+        'temperatures': temperatures 
+    }
+    return render(request, 'home.html', context)
 
 def convert_temp(request, unit, value):
     try:

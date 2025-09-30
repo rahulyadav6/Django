@@ -4,6 +4,9 @@ from . models import Temperature
 
 # Create your views here.
 
+def home(request):
+    return render(request, 'home.html')
+
 def convert_temp(request, unit, value):
     try:
         temp_value = float(value)

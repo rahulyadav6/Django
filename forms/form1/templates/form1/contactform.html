@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django Contact Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        input, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .error { color: red; font-size: 0.9em; }
+        .success { color: green; padding: 10px; background: #f0fff0; border: 1px solid green; }
+        .radio-group label { display: inline-block; margin-right: 15px; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Contact Form Example</h1>
+    <p><strong>HTTP Method Used: {{ methodused }}</strong></p>
+
+    {% if submitteddata %}
+        <div class="success">
+            <h3>Form Submitted Successfully!</h3>
+            <p><strong>Name:</strong> {{ submitteddata.name }}</p>
+            <p><strong>Email:</strong> {{ submitteddata.email }}</p>
+            <p><strong>Contact Method:</strong> {{ submitteddata.contactmethod }}</p>
+            <p><strong>Message:</strong> {{ submitteddata.message }}</p>
+        </div>
+        <hr>
+    {% endif %}
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_name">Name:</label>
+            <input type="text" id="id_name" name="name" required
+                value="{% if errors.name %}{{ request.POST.name }}{% endif %}">
+            {% if errors.name %}
+                <div class="error">{{ errors.name }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="id_email">Email:</label>
+            <input type="email" id="id_email" name="email" required
+                value="{% if errors.email %}{{ request.POST.email }}{% endif %}">
+            {% if errors.email %}
+                <div class="error">{{ errors.email }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label>Preferred Contact Method:</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="contactmethod" value="email"
+                        {% if errors.contactmethod and request.POST.contactmethod == 'email' %}checked{% endif %}>
+                    Email
+                </label>
+                <label>
+                    <input type="radio" name="contactmethod" value="phone"
+                        {% if errors.contactmethod and request.POST.contactmethod == 'phone' %}checked{% endif %}>
+                    Phone
+                </label>
+            </div>
+            {% if errors.contactmethod %}
+                <div class="error">{{ errors.contactmethod }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="id_message">Message:</label>
+            <textarea id="id_message" name="message" rows="5" required>{% if errors.message %}{{ request.POST.message }}{% endif %}</textarea>
+            {% if errors.message %}
+                <div class="error">{{ errors.message }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit">Submit Form</button>
+    </form>
+</body>
+</html>

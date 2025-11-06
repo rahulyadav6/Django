@@ -20,3 +20,6 @@ from .models import Book
 
 def home(request):
     return render(request, 'home.html')
+
+def addbook(request):
+    return render(request,'add_book.html')

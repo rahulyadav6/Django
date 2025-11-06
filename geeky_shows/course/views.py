@@ -16,6 +16,9 @@ def course_list(req):
 #     return render(req, 'course/django.html', context={'dt': dt})
 
 
+# def learn_django(req):
+#     students = {'names':['Rahul', 'Sonam', 'Raj', 'Anu']}
+#     return render(req, 'course/django.html', context=students)
+
 def learn_django(req):
-    students = {'names':['Rahul', 'Sonam', 'Raj', 'Anu']}
-    return render(req, 'course/django.html', context=students)
+    return render(req, 'course/django.html',)

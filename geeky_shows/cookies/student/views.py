@@ -15,3 +15,12 @@ def delcookie(request):
     response =  render(request, 'student/delcookie.html')
     response.delete_cookie('token')
     return response
+
+def setsignedcookie(request):
+    response = render(request, 'student/setsignedcookie.html')
+    response.set_signed_cookie('token', 't123456', salt='tk',)
+    return response
+
+def getsignedcookie(request):
+    token = request.get_signed_cookie('token', default="defaultsignedcookie", salt='tk')
+    return render(request, 'student/getsignedcookie.html', {'token': token})
